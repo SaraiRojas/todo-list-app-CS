@@ -1,8 +1,8 @@
-const app = require('./app');
-const dbConnection = require('./db.js');
+const app = require('./app')
+const dbConnection = require('./db.js')
 
-const { PORT } = require('./config.js');
+const { PORT } = require('./config.js')
 
-dbConnection();
+dbConnection()
 app.listen(PORT)
-console.log('Server on port', PORT);
+console.log('Server on port', PORT)
