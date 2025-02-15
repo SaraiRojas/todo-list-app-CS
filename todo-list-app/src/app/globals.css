@@ -4,6 +4,8 @@
 
   --main-color: #5788ef;
   --secundary-color: #ffffff;
+
+  --alert-color: red;
 }
 
 @media (prefers-color-scheme: dark) {

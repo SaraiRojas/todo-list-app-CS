@@ -21,6 +21,7 @@
   border: 1px var(--main-color) solid;
   border-radius: 10px;
   font-weight: bold;
+  max-width: 15rem;
 }
 
 .formSignUp {
@@ -29,7 +30,18 @@
   padding: 0px 10px;
 }
 
+.formSignUp {
+  max-width: 15rem;
+}
+
 .formLink {
   color: var(--main-color);
   text-decoration: underline;
+}
+
+.alertError {
+  padding-left: 5px;
+  display: block;
+  font-size: 0.6rem;
+  color: var(--alert-color);
 }
