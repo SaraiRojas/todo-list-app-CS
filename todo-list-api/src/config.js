@@ -1,9 +1,11 @@
-const { config } = require('dotenv');
+const { config } = require('dotenv')
 
-config();
+config()
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000
+const TOKEN_SECRET = process.env.TOKEN_SECRET || 'secret'
 
 module.exports = {
-  PORT
+  PORT,
+  TOKEN_SECRET,
 }
