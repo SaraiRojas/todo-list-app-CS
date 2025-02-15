@@ -1,0 +1,7 @@
+.container {
+  background-color: var(--secundary-background);
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  padding-top: 15px;
+}

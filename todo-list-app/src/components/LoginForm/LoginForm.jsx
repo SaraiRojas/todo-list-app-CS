@@ -40,16 +40,16 @@ const LoginForm = ({ type }) => {
       ...prev,
       [field]:
         field === 'email' && !expEmail.test(value)
-          ? 'Formato inválido'
+          ? 'Enter a valid email'
           : field === 'password' && !expPassword.test(value)
-            ? 'Contraseña debe de contener min 8 caracteres'
+            ? 'Password must contain at least 8 characters'
             : '',
     }))
   }
 
   const message = {
-    login: ['Login', 'Not a member?', 'Sign up'],
-    signup: ['Sign up', 'Already a member?', 'Login'],
+    login: ['Login', 'Not a member? ', 'Sign up'],
+    signup: ['Sign up', 'Already a member? ', 'Login'],
   }
 
   const linkURLs = {
