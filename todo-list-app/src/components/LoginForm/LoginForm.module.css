@@ -45,3 +45,8 @@
   font-size: 0.6rem;
   color: var(--alert-color);
 }
+
+.signupTitle {
+  text-align: center;
+  font-size: medium;
+}

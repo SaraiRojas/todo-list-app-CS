@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const registerRequest = async (user) => {
+export const signup = async (user) => {
   const body = {
     ...user,
     username: user.email.split('@')[0],

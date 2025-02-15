@@ -2,16 +2,17 @@
 
 import styles from './LoginForm.module.css'
 import { useState } from 'react'
-import { login } from '@/api/Auth'
+import { login, signup } from '../../api/Auth'
+import Link from 'next/link'
 
-export const LoginForm = () => {
-  const INITIAL_STATE = {
-    email: '',
-    password: '',
-  }
-
-  const [inputValues, setInputValues] = useState(INITIAL_STATE)
+const LoginForm = ({ type }) => {
+  const [inputValues, setInputValues] = useState({ email: '', password: '' })
   const [errors, setErrors] = useState({ email: '', password: '' })
+
+  const api = {
+    login,
+    signup,
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -22,8 +23,7 @@ export const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await login(inputValues)
-      console.log(res)
+      await api[type](inputValues)
     } catch (err) {
       console.log(err)
     }
@@ -44,8 +44,21 @@ export const LoginForm = () => {
     }))
   }
 
+  const message = {
+    login: ['Login', 'Not a member?', 'Sign up'],
+    signup: ['Sign up', 'Already a member?', 'Login'],
+  }
+
+  const linkURLs = {
+    login: '/signup',
+    signup: '/login',
+  }
+
   return (
     <form className={styles.form}>
+      {type === 'signup' && (
+        <h2 className={styles.signupTitle}>Create account</h2>
+      )}
       <input
         className={styles.formInput}
         name="email"
@@ -67,11 +80,16 @@ export const LoginForm = () => {
       />
       <p className={`${styles.alertError}`}>{errors.password}</p>
       <button className={styles.formBtn} type="submit" onClick={handleSubmit}>
-        Login
+        {message[type][0]}
       </button>
       <p className={styles.formSignUp}>
-        Not a member? <span className={styles.formLink}>Sign up</span>
+        {message[type][1]}{' '}
+        <Link href={linkURLs[type]} className={styles.formLink}>
+          {message[type][2]}
+        </Link>
       </p>
     </form>
   )
 }
+
+export default LoginForm
