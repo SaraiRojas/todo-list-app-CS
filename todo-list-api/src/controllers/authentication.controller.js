@@ -44,4 +44,60 @@ const userRegister = async (req, res) => {
   }
 }
 
-module.exports = { userRegister }
+const logIn = async (req, res) => {
+  try {
+    const { email, password } = req.body
+    const getUser = await User.findOne({ email })
+
+    if (!getUser)
+      return res.status(400).json({
+        message: ['Invalid credentials'],
+      })
+
+    const isPasswordEqual = await bcrypt.compare(password, getUser.password)
+    if (!isPasswordEqual) {
+      return res.status(400).json({
+        message: ['Invalid credentials'],
+      })
+    }
+
+    const token = await createAccessToken({
+      id: getUser._id,
+      username: getUser.username,
+    })
+
+    res.cookie('token', token, {
+      httpOnly: process.env.NODE_ENV !== 'development',
+      secure: true,
+      sameSite: 'none',
+    })
+
+    res.json({
+      id: getUser._id,
+      username: getUser.username,
+      email: getUser.email,
+    })
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
+}
+
+const validateToken = async (req, res) => {
+  const { token } = req.cookies
+  if (!token) return res.send(false)
+
+  jwt.verify(token, TOKEN_SECRET, async (error, user) => {
+    if (error) return res.sendStatus(401)
+
+    const userFound = await User.findById(user.id)
+    if (!userFound) return res.sendStatus(401)
+
+    return res.json({
+      id: userFound._id,
+      username: userFound.username,
+      email: userFound.email,
+    })
+  })
+}
+
+module.exports = { userRegister, logIn, validateToken }
