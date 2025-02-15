@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 const LoginForm = ({ type }) => {
   const [inputValues, setInputValues] = useState({ email: '', password: '' })
-  const [errors, setErrors] = useState({ email: '', password: '' })
+  const [errors, setErrors] = useState({ email: '', password: '', submit: '' })
 
   const api = {
     login,
@@ -25,7 +25,10 @@ const LoginForm = ({ type }) => {
     try {
       await api[type](inputValues)
     } catch (err) {
-      console.log(err)
+      setErrors((prev) => ({
+        ...prev,
+        submit: 'Invalid credentials',
+      }))
     }
   }
 
@@ -78,12 +81,14 @@ const LoginForm = ({ type }) => {
         placeholder="password"
         required
       />
-      <p className={`${styles.alertError}`}>{errors.password}</p>
+      <span className={`${styles.alertError}`}>
+        {errors.password || errors.submit}
+      </span>
       <button className={styles.formBtn} type="submit" onClick={handleSubmit}>
         {message[type][0]}
       </button>
       <p className={styles.formSignUp}>
-        {message[type][1]}{' '}
+        {message[type][1]}
         <Link href={linkURLs[type]} className={styles.formLink}>
           {message[type][2]}
         </Link>
