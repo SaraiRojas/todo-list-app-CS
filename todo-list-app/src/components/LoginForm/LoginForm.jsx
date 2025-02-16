@@ -1,17 +1,27 @@
 'use client'
 
 import styles from './LoginForm.module.css'
-import { useState } from 'react'
-import { login, signup } from '../../api/Auth'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import {useAuth} from '../../context/AuthContext'
+import { useRouter } from 'next/navigation'
 
 const LoginForm = ({ type }) => {
   const [inputValues, setInputValues] = useState({ email: '', password: '' })
   const [errors, setErrors] = useState({ email: '', password: '', submit: '' })
 
+  const { logIn, signUp, isAuthenticated } = useAuth()
+  const router = useRouter()
+
+  useEffect(() => {
+    if(isAuthenticated){
+      router.push('/pending')
+    }
+  },[isAuthenticated])
+
   const api = {
-    login,
-    signup,
+    login: logIn,
+    signup: signUp,
   }
 
   const handleChange = (e) => {
@@ -97,4 +107,4 @@ const LoginForm = ({ type }) => {
   )
 }
 
-export default LoginForm
+export default LoginForm;
