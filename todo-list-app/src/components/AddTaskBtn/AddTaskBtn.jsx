@@ -1,7 +1,13 @@
 import styles from './AddTaskBtn.module.css'
+import {useTask} from '../../context/TaskContext'
 
 const AddTaskBtn = () => {
-  return <button className={styles.btn}> + New Task</button>
+
+  const {setModalOpen} = useTask();
+
+  const handleOnClick= () => setModalOpen(true)
+
+  return <button className={styles.btn} onClick={handleOnClick}> + New Task</button>
 }
 
 export default AddTaskBtn

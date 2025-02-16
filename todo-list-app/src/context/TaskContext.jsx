@@ -9,6 +9,7 @@ export const TaskProvider = ({children}) => {
 
   const [tasks, setTasks] = useState(null);
   const [statusHasChange, setStatusHasChange] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const toggleTaskStatus = async (taskId) => {
     try {
@@ -25,7 +26,9 @@ export const TaskProvider = ({children}) => {
         setTasks,
         toggleTaskStatus,
         statusHasChange,
-        setStatusHasChange
+        setStatusHasChange,
+        isModalOpen,
+        setModalOpen
       }}
     >
       {children}

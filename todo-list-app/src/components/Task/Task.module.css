@@ -27,3 +27,14 @@
   clip-path: circle(50% at 50% 50%);
   background-color: var(--selected-color);
 }
+
+.btn{
+  background: none;
+	color: inherit;
+	border: none;
+  margin-left: auto;
+}
+
+.btn:hover{
+  cursor: pointer;
+}

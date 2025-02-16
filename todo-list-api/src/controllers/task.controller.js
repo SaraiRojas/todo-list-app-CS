@@ -20,6 +20,7 @@ const getTask = async (req, res) => {
 }
 
 const createTask = async (req, res) => {
+  console.log(req.body)
   try {
     const { title, subtasks } = req.body
     const newTask = new Task({
@@ -64,15 +65,18 @@ const updateTaskStatus = async (req, res) => {
     const task = await Task.findById(req.params.id)
     if (!task) return res.status(404).json({ message: 'Task not found' })
 
-    const hasPendingSubtasks = task.subtasks.some(
-      (subtask) => subtask.status === 'pendiente',
-    )
 
-    if (task.status === 'pendiente' && hasPendingSubtasks) {
-      return res
-        .status(400)
-        .json({ message: 'Task cannot be completed some subtasks are pending' })
-    }
+    // TODO: Implement subtasks endpoints to be able to use this logic
+
+    // const hasPendingSubtasks = task.subtasks.some(
+    //   (subtask) => subtask.status === 'pendiente',
+    // )
+
+    // if (task.status === 'pendiente' && hasPendingSubtasks) {
+    //   return res
+    //     .status(400)
+    //     .json({ message: 'Task cannot be completed some subtasks are pending' })
+    // }
 
     const status = task.status === 'pendiente' ? 'completada' : 'pendiente'
 

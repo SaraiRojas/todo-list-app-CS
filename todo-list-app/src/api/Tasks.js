@@ -7,13 +7,13 @@ export const getTasks = (userId) =>
     responseType: 'json',
   }).then((data) => data)
 
-export const getTask = () => { }
+export const createTask = (userId, body) => {
+  return axios.post(`http://localhost:8000/api/tasks?userId=${userId}`, body)
+}
 
-export const createTask = () => { }
-
-export const deleTask = () => { }
-
-export const updateTask = () => { }
+export const deleTask = (id) => {
+  return axios.delete(`http://localhost:8000/api/tasks/${id}`)
+}
 
 export const updateStatusTask = (taskId) => axios({
   method: 'patch',
@@ -21,4 +21,4 @@ export const updateStatusTask = (taskId) => axios({
   responseType: 'json',
 }).then((data) => data)
 
-export const updateStatusSubTask = () => { }
+
