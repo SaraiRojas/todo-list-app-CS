@@ -1,11 +1,13 @@
 import styles from './Task.module.css'
 
 const Task = ({ data }) => {
-  console.log(data)
+
+  const isChecked = data.status === 'completada';
+
   return (
     <article className={styles.article}>
-      <input type="checkbox" className={styles.checkbox}></input>
-      <h1 className={styles.title}>Buy books</h1>
+      <input type="checkbox" className={styles.checkbox} checked={isChecked}></input>
+      <h1 className={styles.title}>{data.title}</h1>
     </article>
   )
 }

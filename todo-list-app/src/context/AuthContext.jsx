@@ -7,13 +7,13 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
 
-  const [user, setUser] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   
   const logIn = async (user) => {
     try {
-      await login(user);
-      setUser(user);
+      const res = await login(user);
+      setUserId(res.data.id);
       setIsAuthenticated(true);
     } catch (err) {
       throw new Error(err)
@@ -22,8 +22,8 @@ export const AuthProvider = ({children}) => {
 
   const signUp = async (user) => {
     try {
-      await signup(user);
-      setUser(user);
+      const res = await signup(user);
+      setUserId(res.data.id);
       setIsAuthenticated(true);
     } catch (err) {
       throw new Error(err)
@@ -35,7 +35,7 @@ export const AuthProvider = ({children}) => {
       value={{
         logIn,
         signUp,
-        user,
+        userId,
         isAuthenticated
       }}
     >
