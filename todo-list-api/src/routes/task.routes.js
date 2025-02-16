@@ -13,14 +13,14 @@ const router = Router()
 
 router.get('/tasks', getTasks)
 
-router.get('/tasks/:id', auth, getTask)
+router.get('/tasks/:id', getTask)
 
-router.post('/tasks', auth, createTask)
+router.post('/tasks', createTask)
 
-router.delete('/tasks/:id', auth, deleteTask)
+router.delete('/tasks/:id', deleteTask)
 
-router.put('/tasks/:id', auth, updateTask)
+router.put('/tasks/:id', updateTask)
 
-router.patch('/tasks/:id', auth, updateTaskStatus)
+router.patch('/tasks/:id', updateTaskStatus)
 
 module.exports = router

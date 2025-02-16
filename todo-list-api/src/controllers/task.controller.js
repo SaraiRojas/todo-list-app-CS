@@ -25,7 +25,7 @@ const createTask = async (req, res) => {
     const newTask = new Task({
       title,
       subtasks,
-      userId: req.user.id,
+      userId: req.query.userId,
     })
     await newTask.save()
     res.json(newTask)

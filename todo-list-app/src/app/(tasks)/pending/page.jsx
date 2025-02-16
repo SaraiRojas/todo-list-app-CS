@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import {getTasks} from '../../../api/Tasks'
 import {useAuth} from '../../../context/AuthContext'
 import { useTask } from '../../../context/TaskContext'
+import {filterByStatus} from '../../../utils/filterByStatus'
 
 const pending = () => {
 
@@ -20,7 +21,7 @@ const pending = () => {
 
   return tasks && (
     <TaskContainer>
-      {tasks.map(task => <Task data={task} key={task._id}></Task>)}
+      {filterByStatus('pendiente', tasks).map(task => <Task data={task} key={task._id}></Task>)}
     </TaskContainer>
   )
 }
