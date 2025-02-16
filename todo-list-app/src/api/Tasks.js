@@ -15,6 +15,10 @@ export const deleTask = () => { }
 
 export const updateTask = () => { }
 
-export const updateStatusTask = () => { }
+export const updateStatusTask = (taskId) => axios({
+  method: 'patch',
+  url: `http://localhost:8000/api/tasks/${taskId}`,
+  responseType: 'json',
+}).then((data) => data)
 
 export const updateStatusSubTask = () => { }

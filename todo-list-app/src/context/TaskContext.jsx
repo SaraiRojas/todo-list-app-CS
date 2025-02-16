@@ -1,19 +1,31 @@
 'use client'
 
 import { createContext, useContext, useState } from "react";
-import {login, signup} from '../api/Auth'
+import { updateStatusTask } from '../api/Tasks'
 
 const TaskContext = createContext();
 
 export const TaskProvider = ({children}) => {
 
   const [tasks, setTasks] = useState(null);
+  const [statusHasChange, setStatusHasChange] = useState(false);
+
+  const toggleTaskStatus = async (taskId) => {
+    try {
+      await updateStatusTask(taskId);
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
 
   return (
     <TaskContext.Provider
       value={{
         tasks,
-        setTasks
+        setTasks,
+        toggleTaskStatus,
+        statusHasChange,
+        setStatusHasChange
       }}
     >
       {children}

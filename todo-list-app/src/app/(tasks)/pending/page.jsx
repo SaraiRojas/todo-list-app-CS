@@ -11,13 +11,13 @@ import {filterByStatus} from '../../../utils/filterByStatus'
 const pending = () => {
 
   const { userId } = useAuth()
-  const { tasks, setTasks } = useTask()
+  const { tasks, setTasks, statusHasChange } = useTask()
 
   useEffect(()=>{
     getTasks(userId)
       .then((res => setTasks(res.data)))
       .catch((err => console.log(err)))
-  },[userId])
+  },[userId, statusHasChange])
 
   return tasks && (
     <TaskContainer>
