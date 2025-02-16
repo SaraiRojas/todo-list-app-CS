@@ -1,0 +1,17 @@
+.headerContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 15px;
+  border-bottom: 1px solid var(--unselected-color);
+  margin-bottom: 10px;
+}
+
+.signOut {
+  align-self: center;
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+.signOut:hover {
+  cursor: pointer;
+}

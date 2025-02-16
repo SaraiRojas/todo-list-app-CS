@@ -1,0 +1,35 @@
+.navContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 15px;
+  color: var(--unselected-color);
+  background-color: var(--secundary-background);
+}
+
+.navigation {
+  display: flex;
+}
+
+.navOption {
+  font-size: 1.2rem;
+  list-style-type: none;
+}
+
+.selected {
+  color: var(--selected-color);
+  text-shadow: 1px 0px 0px var(--selected-color);
+}
+
+.navOption:hover {
+  cursor: pointer;
+}
+
+.navOption:nth-child(1) {
+  border-right: 1px solid var(--unselected-color);
+  padding-right: 15px;
+}
+
+.navOption:nth-child(2) {
+  padding-left: 15px;
+}

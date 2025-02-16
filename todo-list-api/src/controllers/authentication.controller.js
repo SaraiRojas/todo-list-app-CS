@@ -1,5 +1,7 @@
 const User = require('../models/user.model.js')
+const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const { TOKEN_SECRET } = require('../config.js')
 const createAccessToken = require('../lib/jwt.js')
 
 const userRegister = async (req, res) => {
@@ -28,9 +30,11 @@ const userRegister = async (req, res) => {
       id: user._id,
     })
 
+    console.log(token)
+
     res.cookie('token', token, {
-      httpOnly: process.env.NODE_ENV !== 'development',
-      secure: true,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
       sameSite: 'none',
     })
 
@@ -83,7 +87,7 @@ const logIn = async (req, res) => {
 }
 
 const validateToken = async (req, res) => {
-  const { token } = req.cookies
+  const { token } = req.headers.cookies
   if (!token) return res.send(false)
 
   jwt.verify(token, TOKEN_SECRET, async (error, user) => {
