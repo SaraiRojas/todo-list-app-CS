@@ -11,7 +11,7 @@ const {
 
 const router = Router()
 
-router.get('/tasks', auth, getTasks)
+router.get('/tasks', getTasks)
 
 router.get('/tasks/:id', auth, getTask)
 

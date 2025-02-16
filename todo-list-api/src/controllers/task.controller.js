@@ -2,7 +2,7 @@ const Task = require('../models/task.model.js')
 
 const getTasks = async (req, res) => {
   try {
-    const tasks = await Task.find({ userId: req.user.id }).populate('userId')
+    const tasks = await Task.find({ userId: req.query.userId }).populate('userId')
     res.json(tasks)
   } catch (error) {
     return res.status(500).json({ message: error.message })
