@@ -60,6 +60,8 @@ El punto de entrada de la aplicación del lado del servidor se encunetra en:
 
 El punto de entrada de la aplicación del lado del cliente se encunetra en:
 
+!IMPORTANTE! : para comenzar ir a la ruta ```/login```
+
 [http://localhost:3000/login](http://localhost:3000/login)
 
 ![alt text](image.png)
