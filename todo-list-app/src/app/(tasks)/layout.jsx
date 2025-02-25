@@ -8,8 +8,7 @@ import TaskModal from '../../components/TaskForm/TaskForm'
 import { useTask } from '../../context/TaskContext'
 
 export default function RootLayout({ children }) {
-
-  const {isModalOpen, setModalOpen} = useTask();
+  const { isModalOpen, setModalOpen } = useTask()
 
   return (
     <main className={styles.main}>

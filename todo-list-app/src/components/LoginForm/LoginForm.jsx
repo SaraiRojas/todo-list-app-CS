@@ -3,7 +3,7 @@
 import styles from './LoginForm.module.css'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import {useAuth} from '../../context/AuthContext'
+import { useAuth } from '../../context/AuthContext'
 import { useRouter } from 'next/navigation'
 
 const LoginForm = ({ type }) => {
@@ -14,10 +14,10 @@ const LoginForm = ({ type }) => {
   const router = useRouter()
 
   useEffect(() => {
-    if(isAuthenticated){
+    if (isAuthenticated) {
       router.push('/pending')
     }
-  },[isAuthenticated])
+  }, [isAuthenticated])
 
   const api = {
     login: logIn,
@@ -107,4 +107,4 @@ const LoginForm = ({ type }) => {
   )
 }
 
-export default LoginForm;
+export default LoginForm
