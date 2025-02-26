@@ -5,7 +5,8 @@ import styles from './TaskForm.module.css'
 import { useAuth } from '../../context/AuthContext'
 import { useTask } from '../../context/TaskContext'
 import { createTask } from '../../api/Tasks'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
+
 export default function TaskModal({ isOpen, onClose }) {
   const [task, setTask] = useState({
     title: '',
@@ -28,7 +29,7 @@ export default function TaskModal({ isOpen, onClose }) {
   const addSubtask = () => {
     setTask({
       ...task,
-      subtasks: [...task.subtasks, { title: '' }],
+      subtasks: [...task.subtasks, { id: uuidv4(), title: '' }],
     })
   }
 
@@ -70,9 +71,13 @@ export default function TaskModal({ isOpen, onClose }) {
 
   return (
     <div className={styles.outsideContainer}>
-       <div className={styles.container}>
+      <div className={styles.container}>
         <div className={styles.taskHeader}>
-          <button type="button" onClick={handleOnClose} className={styles.closeBtn}>
+          <button
+            type="button"
+            onClick={handleOnClose}
+            className={styles.closeBtn}
+          >
             x
           </button>
           <h2 className={styles.taskTitle}>Create Task</h2>
@@ -100,29 +105,34 @@ export default function TaskModal({ isOpen, onClose }) {
           <div className={styles.subtasksContainer}>
             <div className={styles.subtasksHeader}>
               <h3 className={styles.subtasksTitle}>Subtasks</h3>
-              <button type="button" onClick={addSubtask} className={`${styles.btn} ${styles.addBtn}`}>
+              <button
+                type="button"
+                onClick={addSubtask}
+                className={`${styles.btn} ${styles.addBtn}`}
+              >
                 + Add
               </button>
             </div>
             <div className={styles.subtasksList}>
               {task.subtasks.map((subtask, index) => (
-                <div key={uuidv4()} className={styles.subTask}>
+                <div key={subtask.id} className={styles.subTask}>
                   <button
                     type="button"
                     onClick={() => removeSubtask(index)}
                     className={styles.deleteBtn}
-                    key={`btn-${uuidv4()}`}
+                    key={`btn-${subtask.id}`}
                   >
                     ✕
                   </button>
                   <input
                     type="text"
-                    placeholder="Subtask Title"
+                    name="subtask"
+                    placeholder="write a subtask"
                     value={subtask.title}
                     onChange={(e) => handleSubtaskChange(index, e.target.value)}
                     className={styles.input}
                     required
-                    key={`input-${uuidv4()}`}
+                    key={`input-${subtask.id}`}
                   />
                 </div>
               ))}
@@ -132,7 +142,6 @@ export default function TaskModal({ isOpen, onClose }) {
           <button type="submit" className={`${styles.btn} ${styles.createBtn}`}>
             Create task
           </button>
-
         </form>
       </div>
     </div>
