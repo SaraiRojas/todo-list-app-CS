@@ -5,7 +5,7 @@ import styles from './TaskForm.module.css'
 import { useAuth } from '../../context/AuthContext'
 import { useTask } from '../../context/TaskContext'
 import { createTask } from '../../api/Tasks'
-
+import { v4 as uuidv4 } from 'uuid';
 export default function TaskModal({ isOpen, onClose }) {
   const [task, setTask] = useState({
     title: '',
@@ -69,62 +69,72 @@ export default function TaskModal({ isOpen, onClose }) {
   if (!isOpen) return null
 
   return (
-    <div className={styles.container}>
-      <h2>Create Task</h2>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="title"
-          placeholder="Task Title"
-          value={task.title}
-          onChange={handleChange}
-          className={styles.input}
-          required
-        />
-        <textarea
-          name="comments"
-          placeholder="Comments"
-          value={task.comments}
-          className={styles.textArea}
-        />
+    <div className={styles.outsideContainer}>
+       <div className={styles.container}>
+        <div className={styles.taskHeader}>
+          <button type="button" onClick={handleOnClose} className={styles.closeBtn}>
+            x
+          </button>
+          <h2 className={styles.taskTitle}>Create Task</h2>
+        </div>
 
-        <div className={styles.subtasksContainer}>
-          <h3 className={styles.subtasks}>Subtasks</h3>
-          {task.subtasks.map((subtask, index) => (
-            <div key={subtask.id}>
-              <button
-                type="button"
-                onClick={() => removeSubtask(index)}
-                className={styles.btnSubtask}
-                key={`btn-${subtask.id}`}
-              >
-                ✕
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.mainFields}>
+            <input
+              type="text"
+              name="title"
+              placeholder="Task Title"
+              value={task.title}
+              onChange={handleChange}
+              className={styles.input}
+              required
+            />
+            <textarea
+              name="comments"
+              placeholder="Comments"
+              value={task.comments}
+              className={styles.textArea}
+            />
+          </div>
+
+          <div className={styles.subtasksContainer}>
+            <div className={styles.subtasksHeader}>
+              <h3 className={styles.subtasksTitle}>Subtasks</h3>
+              <button type="button" onClick={addSubtask} className={`${styles.btn} ${styles.addBtn}`}>
+                + Add
               </button>
-              <input
-                type="text"
-                placeholder="Subtask Title"
-                value={subtask.title}
-                onChange={(e) => handleSubtaskChange(index, e.target.value)}
-                className={styles.input}
-                required
-                key={`input-${subtask.id}`}
-              />
             </div>
-          ))}
-          <button type="button" onClick={addSubtask} className={styles.btn}>
-            + Add Subtask
-          </button>
-        </div>
+            <div className={styles.subtasksList}>
+              {task.subtasks.map((subtask, index) => (
+                <div key={uuidv4()} className={styles.subTask}>
+                  <button
+                    type="button"
+                    onClick={() => removeSubtask(index)}
+                    className={styles.deleteBtn}
+                    key={`btn-${uuidv4()}`}
+                  >
+                    ✕
+                  </button>
+                  <input
+                    type="text"
+                    placeholder="Subtask Title"
+                    value={subtask.title}
+                    onChange={(e) => handleSubtaskChange(index, e.target.value)}
+                    className={styles.input}
+                    required
+                    key={`input-${uuidv4()}`}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
 
-        <div className={styles.btnContainer}>
-          <button type="button" onClick={handleOnClose} className={styles.btn}>
-            X Close
+          <button type="submit" className={`${styles.btn} ${styles.createBtn}`}>
+            Create task
           </button>
-          <button type="submit" className={styles.btn}>
-            Create
-          </button>
-        </div>
-      </form>
+
+        </form>
+      </div>
     </div>
   )
 }

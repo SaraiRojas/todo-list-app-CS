@@ -1,3 +1,12 @@
+.outsideContainer{
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  position: absolute;
+  height: 99vh;
+  width: 99vw;
+  z-index: 1000;
+}
+
 .container {
   position: absolute;
   margin-left: auto;
@@ -5,19 +14,38 @@
   left: 0;
   right: 0;
   top: 20%;
-  background-color: var(--main-color);
+  background-color: var(--background);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 15px;
   border-radius: 10px;
   height: 70%;
   width: 50%;
 }
 
+.taskHeader{
+  width: 100%;
+  height: 10%;
+  display: flex;
+}
+
+.taskTitle{
+  width: 100%;
+  text-align: center;
+}
+
 .form {
-  padding: 15px;
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mainFields{
+  width: 100%;
+  height: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,45 +53,115 @@
 }
 
 .input {
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px #676767 solid;
   height: 2rem;
-  width: 15rem;
+  width: 80%;
   padding: 0 10px;
 }
 
+.input:focus{
+  outline: 1px solid var(--main-color);
+}
+
 .textArea {
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px #676767 solid;
   height: 3rem;
-  width: 15rem;
+  width: 80%;
   padding: 10px;
 }
 
-.btnContainer {
-  display: flex;
-  gap: 30px;
+.textArea:focus{
+  outline: 1px solid var(--main-color);
 }
 
 .btn {
   padding: 0.2rem 1rem;
-  background-color: var(--btn-color);
-  color: var(--main-color);
-  border: 1px solid var(--btn-color);
   border-radius: 10px;
   font-weight: bold;
-  font-size: 1rem;
+}
+
+.createBtn{
+  background-color: var(--main-color);
+  border: 1px solid var(--main-color);
+  color: var(--btn-color);
+  font-size: 1.1rem;
+  padding: 8px 15px;
 }
 
 .btn:hover {
   cursor: pointer;
 }
 
+.closeBtn{
+  color: var(--main-color);
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.deleteBtn{
+  color: var(--main-color);
+  background-color: transparent;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
 .subtasksContainer {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 15px;
   align-items: center;
+  min-height: 70%;
+  padding-top: 2rem;
+}
+
+.subtasksHeader{
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.subtasksTitle{
+  grid-area: 1 / 2 / 2 / 4;
+  text-align: center;
+}
+
+.addBtn{
+  grid-area: 1 / 4 / 2 / 5;
+  justify-self: end;
+  background-color: var(--btn-color);
+  color: var(--main-color);
+  border: 1px solid var(--btn-color);
+  font-size: 1rem;
+}
+
+.subtasksList{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  overflow-y: auto;
+  height: 100hv;
+}
+
+.subTask{
+  display: flex;
+  align-items: center;
+  gap: 2%;
+  justify-content: center;
+  width: 95%;
 }
 
 .btnSubtask {
