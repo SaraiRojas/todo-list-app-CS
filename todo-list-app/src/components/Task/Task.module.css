@@ -28,13 +28,13 @@
   background-color: var(--selected-color);
 }
 
-.btn{
+.btn {
   background: none;
-	color: inherit;
-	border: none;
+  color: inherit;
+  border: none;
   margin-left: auto;
 }
 
-.btn:hover{
+.btn:hover {
   cursor: pointer;
 }

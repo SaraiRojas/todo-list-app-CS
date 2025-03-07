@@ -3,26 +3,29 @@
 import TaskContainer from '../../../components/TaskContainer/TaskContainer'
 import Task from '../../../components/Task/Task'
 import { useEffect } from 'react'
-import {getTasks} from '../../../api/Tasks'
-import {useAuth} from '../../../context/AuthContext'
+import { getTasks } from '../../../api/Tasks'
+import { useAuth } from '../../../context/AuthContext'
 import { useTask } from '../../../context/TaskContext'
-import {filterByStatus} from '../../../utils/filterByStatus'
+import { filterByStatus } from '../../../utils/filterByStatus'
 
 const pending = () => {
-
   const { userId } = useAuth()
-  const { tasks, setTasks, statusHasChange } = useTask()
+  const { tasks, setTasks } = useTask()
 
-  useEffect(()=>{
+  useEffect(() => {
     getTasks(userId)
-      .then((res => setTasks(res.data)))
-      .catch((err => console.log(err)))
-  },[userId, statusHasChange])
+      .then((res) => setTasks(res.data))
+      .catch((err) => console.log(err))
+  }, [userId])
 
-  return tasks && (
-    <TaskContainer>
-      {filterByStatus('pendiente', tasks).map(task => <Task data={task} key={task._id}></Task>)}
-    </TaskContainer>
+  return (
+    tasks && (
+      <TaskContainer>
+        {filterByStatus('pendiente', tasks).map((task) => (
+          <Task data={task} key={task._id}></Task>
+        ))}
+      </TaskContainer>
+    )
   )
 }
 

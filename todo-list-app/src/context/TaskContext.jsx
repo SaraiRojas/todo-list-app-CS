@@ -1,19 +1,17 @@
 'use client'
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react'
 import { updateStatusTask } from '../api/Tasks'
 
-const TaskContext = createContext();
+const TaskContext = createContext()
 
-export const TaskProvider = ({children}) => {
-
-  const [tasks, setTasks] = useState(null);
-  const [statusHasChange, setStatusHasChange] = useState(false);
-  const [isModalOpen, setModalOpen] = useState(false);
+export const TaskProvider = ({ children }) => {
+  const [tasks, setTasks] = useState(null)
+  const [isModalOpen, setModalOpen] = useState(false)
 
   const toggleTaskStatus = async (taskId) => {
     try {
-      await updateStatusTask(taskId);
+      await updateStatusTask(taskId)
     } catch (err) {
       throw new Error(err)
     }
@@ -25,10 +23,8 @@ export const TaskProvider = ({children}) => {
         tasks,
         setTasks,
         toggleTaskStatus,
-        statusHasChange,
-        setStatusHasChange,
         isModalOpen,
-        setModalOpen
+        setModalOpen,
       }}
     >
       {children}
@@ -37,9 +33,9 @@ export const TaskProvider = ({children}) => {
 }
 
 export const useTask = () => {
-  const context = useContext(TaskContext);
-  if(!context){
+  const context = useContext(TaskContext)
+  if (!context) {
     throw new Error('useTask must be used within an AuthProvider')
   }
-  return context;
-};
+  return context
+}
